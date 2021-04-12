@@ -131,3 +131,10 @@ dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
 
 }
 
+
+
+test_commit <- function(x){
+
+  X + 1
+
+}
