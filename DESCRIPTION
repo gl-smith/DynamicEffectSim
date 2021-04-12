@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Gregory Smith
 Maintainer: The package maintainer <gregorylsmith@duke.edu>
 Description: The package simulates and visualizes dynamic causal relationships based on univariate ARIMA models.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 

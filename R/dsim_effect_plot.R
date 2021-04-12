@@ -1,6 +1,5 @@
+
 #----- Creates Custom ggplot Theme
-library(usethis)
-use_package("MASS", "Suggests")
 
 dynamic_effect_gg_theme <- function(base_size = 14) {
 
