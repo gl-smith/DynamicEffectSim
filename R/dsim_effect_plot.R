@@ -27,6 +27,8 @@ dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
   require(assertthat)
   require(ggplot2)
 
+  # Add Ability to change color and line width defaults
+
   # Tests Class (Is it a Dynamic ARIMA Sim Object?)
   assert_that(any(class(dsim_object) == "dyn-arima-sim"),
               msg = "The input to argument one must be of class dyn-arima-sim")
