@@ -14,7 +14,7 @@ library(cowplot)
 
 #----- Creates Custom ggplot Theme
 
-aggregation_gg_theme <- function(base_size = 14) {
+dynamic_effect_gg_theme <- function(base_size = 14) {
   theme_bw(base_size = base_size) %+replace%
     theme(
       plot.title = element_text(size = 17, face = "bold"), # , hjust = .5
@@ -151,7 +151,7 @@ dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
 
 
   # Initializes Plot
-  plot <- ggplot(dsim_object, aes(x = time)) + aggregation_gg_theme()
+  plot <- ggplot(dsim_object, aes(x = time)) + dynamic_effect_gg_theme()
 
   # Adds a Horizontal Line at 0 on the Y axis
   plot <- plot + geom_hline(
