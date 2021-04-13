@@ -1,0 +1,70 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# DynamicEffectSim
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+DynamicEffectSim allows researchers to simulate and visualize dynamic causal relationships using univariate ARIMA models. This tool makes it possible to simulate interventions whose effects grow stronger or weaker over time. The benefit of using ARIMA models is that they account for autoregressive processes, moving averages, and seasonality. Future versions of the package will also accommodate multivariate ARIMA models. 
+
+# Core Functions
+
+DynamicEffectSim has two core functions.
+
+- `arima_ts_sim`: Simulates a time series with a time-varying intervention. The simulation includes both a treated and control counterfactual states.
+
+- `dsim_effect_plot`: Plots the time series using ggplot2. The user can specify whether they want to plot the treated time series, the untreated time series, the pointwise effect of the intervention, or the cumulative effect of the intervention. 
+
+
+## Installation
+
+``` r
+# install.packages("devtools")
+library(devtools)
+devtools::install_github("gl-smith/DynamicEffectSim")
+
+```
+## Example: Simulating a Treatment With an Attenuating Effect
+
+This is a basic example which shows you how to simulate and plot a time series with an intervention that attenuates over time. The results of the simulation are stored as a tibble. 
+
+```{r example attenuation, message = FALSE, cache = TRUE}
+
+library(tidyverse)
+library(assertthat)
+library(DynamicEffectSim)
+
+attenuating_effect <- 
+arima_ts_sim(
+  model = list(ar = 0.02),
+  change_type = "attenuation",
+  ts_length = 500,
+  intercept = 4,
+  effect = 10,
+  delta = .05
+) 
+
+glimpse(attenuating_effect)
+
+```
+
+
+The `dsim_effect_plot` makes it easy to plot the simulated time series. The default option returns a plot of the "treated" time series.
+
+
+```{r plot simulation, message = FALSE}
+dsim_effect_plot(attenuating_effect)
+```
