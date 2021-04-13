@@ -2,7 +2,8 @@
 #----- Creates a Function To Simulate Time Series With Attenuating/Amplifying Effects
 
 arima_ts_sim <-
-  function(intercept = 0,
+  function(seed = 175,
+           intercept = 0,
            noise_mean = 0,
            noise_sd = 1,
            effect = 0,
@@ -15,6 +16,9 @@ arima_ts_sim <-
            ...) {
 
     require(tidyverse)
+    require(assertthat)
+
+    set.seed(seed)
 
     # Inputs Numeric?
     # Round Values (Add)
