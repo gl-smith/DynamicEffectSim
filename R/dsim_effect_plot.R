@@ -5,7 +5,6 @@
 #'
 #' This function plots the  simulated time series in \code{ggplot2}.
 #'
-#'
 #' @param dsim_object The output from \code{arima_ts_sim}.
 #'
 #' @param plot_output Specifies which time series should be plotted on the y-axis. There are four possible options: \code{pointwise_effect}, \code{cumulative_effect}, \code{untreated_time_series}, and \code{treated_time_series}.
