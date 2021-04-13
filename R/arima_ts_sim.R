@@ -1,9 +1,37 @@
 
-#----- Creates a Function To Simulate Time Series With Attenuating/Amplifying Effects
+
+#' @title Simulates time series using univariate ARIMA models
+#'
+#' @description
+#'
+#' This function simulates time series and allows users to add interventions
+#' whose effects vary over time. The function returns a tibble.
+#'
+#'
+#' @param intercept The starting y-intercept value for the time series.
+#'
+#' @param noise_mean The average value of random noise that should be added to the time series.
+#'
+#' @param noise_sd The standard deviation of random noise that should be added to the time series.
+#'
+#' @param effect The initial effect of the intervention.
+#'
+#' @param effect_ceiling The maximum value for the pointwise effect of a policy. This argument only works when \code{change_type = "amplification"}.
+#'
+#' @param ts_length The length of the simulated time period.
+#'
+#' @param treat_start The time that the intervention begins.
+#'
+#' @param coefficient_x1 Scales the value of x1.
+#'
+#' @param change_type Specifies the way that the treatment should change over time. Possible inputs are \code{stasis}, \code{attenuation}, and \code{amplification}.
+#'
+#' @param delta Specifies that rate that the effect of the treatment changes.
+#'
+#' @param seed Sets the random seed.
 
 arima_ts_sim <-
-  function(seed = 175,
-           intercept = 0,
+  function(intercept = 0,
            noise_mean = 0,
            noise_sd = 1,
            effect = 0,
@@ -13,6 +41,7 @@ arima_ts_sim <-
            coefficient_x1 = 1,
            change_type = "stasis",
            delta = 1,
+           seed = 175,
            ...) {
 
     require(tidyverse)
