@@ -6,6 +6,7 @@ arima_ts_sim <-
            noise_mean = 0,
            noise_sd = 1,
            effect = 0,
+           effect_ceiling = Inf, # Only works for policies with amplifying effects
            ts_length = 200,
            treat_start = 75,
            coefficient_x1 = 1,
@@ -18,9 +19,6 @@ arima_ts_sim <-
     # Inputs Numeric?
     # Round Values (Add)
     # Add Amplification Ceiling
-
-    # Test
-
 
     # Tests that Time Series Length > Time Series Start Time
     assert_that(ts_length > treat_start,
@@ -83,6 +81,7 @@ arima_ts_sim <-
       final_output_data <- base_output_data %>%
         mutate(
           y1 = y0 + post_treatment*(effect + time_post_treat * delta),
+          y1 = if_else(y1 > effect_ceiling, y0 + effect_ceiling, y1),
           pointwise_effect = y1 - y0,
           cumulative_effect = cumsum(pointwise_effect)
         )

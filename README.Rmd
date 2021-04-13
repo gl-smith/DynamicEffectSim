@@ -51,6 +51,7 @@ attenuating_effect <-
 arima_ts_sim(
   model = list(ar = 0.02),
   change_type = "attenuation",
+  treat_start = 75,
   ts_length = 500,
   intercept = 4,
   effect = 10,
