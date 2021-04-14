@@ -140,16 +140,3 @@ arima_ts_sim <-
     return(final_output_data)
 
   }
-
-
-library(tidyverse)
-
-arima_ts_sim(
-  model = list(ar = 0.02),
-  change_type = "amplification",
-  ts_length = 500,
-  intercept = 4,
-  effect = 10,
-  delta = .05,
-  round_to_integers = TRUE
-)
