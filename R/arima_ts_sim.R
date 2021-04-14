@@ -34,6 +34,8 @@ arima_ts_sim <-
   function(intercept = 0,
            noise_mean = 0,
            noise_sd = 1,
+           x1_noise_mean = 0,
+           x1_noise_sd = 1,
            effect = 0,
            effect_ceiling = Inf, # Only works for policies with amplifying effects
            ts_length = 200,
@@ -68,8 +70,8 @@ arima_ts_sim <-
     arima_args <- list(...)
 
     # Fits a Univariate ARIMA Model
-    x1 <- intercept + arima.sim(arima_args, n = ts_length)
-    y0 <- coefficient_x1 * x1 + rnorm(ts_length, mean = noise_mean, sd = noise_sd)
+    x1 <- intercept + arima.sim(arima_args, n = ts_length, mean = noise_mean, sd = noise_sd)
+    y0 <- coefficient_x1 * x1 + rnorm(ts_length, mean = x1_noise_mean, sd = x1_noise_sd)
 
     raw_ts_data <- cbind(y0, x1)
 
