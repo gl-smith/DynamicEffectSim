@@ -32,6 +32,8 @@
 #'
 #' @param delta Specifies that rate that the effect of the treatment changes.
 #'
+#' @param round_to_integers Should the simulated values be rounded to integers?
+#'
 #' @param seed Sets the random seed.
 
 arima_ts_sim <-
@@ -47,6 +49,7 @@ arima_ts_sim <-
            coefficient_x1 = 1,
            change_type = "stasis",
            delta = 1,
+           round_to_integers = FALSE,
            seed = 175,
            ...) {
 
@@ -110,7 +113,7 @@ arima_ts_sim <-
       final_output_data <- base_output_data %>%
         mutate(
           y1 = y0 + post_treatment*(effect - time_post_treat * delta),
-          y1 = if_else(y1 < y0, as.numeric(y0), as.numeric(y1)),
+          y1 = if_else(y1 < y0, y0, y1),
           pointwise_effect = y1 - y0,
           cumulative_effect = cumsum(pointwise_effect)
         )
@@ -126,8 +129,27 @@ arima_ts_sim <-
         )
     }
 
+
+    if (round_to_integers == "TRUE") {
+      final_output_data <- final_output_data %>%
+        mutate_at(c("y0", "x1", "y1", "pointwise_effect", "cumulative_effect"), round)
+    }
+
     class(final_output_data) <- c("tbl_df", "tbl", "data.frame", "dyn-arima-sim")
 
     return(final_output_data)
 
   }
+
+
+library(tidyverse)
+
+arima_ts_sim(
+  model = list(ar = 0.02),
+  change_type = "amplification",
+  ts_length = 500,
+  intercept = 4,
+  effect = 10,
+  delta = .05,
+  round_to_integers = TRUE
+)
