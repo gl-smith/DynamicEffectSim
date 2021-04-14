@@ -8,6 +8,8 @@ arima_ts_sim(
   intercept = 0,
   noise_mean = 0,
   noise_sd = 1,
+  x1_noise_mean = 0,
+  x1_noise_sd = 1,
   effect = 0,
   effect_ceiling = Inf,
   ts_length = 200,
@@ -15,6 +17,7 @@ arima_ts_sim(
   coefficient_x1 = 1,
   change_type = "stasis",
   delta = 1,
+  round_to_integers = FALSE,
   seed = 175,
   ...
 )
@@ -25,6 +28,10 @@ arima_ts_sim(
 \item{noise_mean}{The average value of random noise that should be added to the time series.}
 
 \item{noise_sd}{The standard deviation of random noise that should be added to the time series.}
+
+\item{x1_noise_mean}{The average value of to random noise that should be added when simulating x1.}
+
+\item{x1_noise_sd}{The standard deviation of random noise that should be added when simulating x1.}
 
 \item{effect}{The initial effect of the intervention.}
 
@@ -39,6 +46,8 @@ arima_ts_sim(
 \item{change_type}{Specifies the way that the treatment should change over time. Possible inputs are \code{stasis}, \code{attenuation}, and \code{amplification}.}
 
 \item{delta}{Specifies that rate that the effect of the treatment changes.}
+
+\item{round_to_integers}{Should the simulated values be rounded to integers?}
 
 \item{seed}{Sets the random seed.}
 }
