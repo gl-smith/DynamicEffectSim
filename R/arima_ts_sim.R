@@ -14,6 +14,10 @@
 #'
 #' @param noise_sd The standard deviation of random noise that should be added to the time series.
 #'
+#' @param x1_noise_mean The average value of to random noise that should be added when simulating x1.
+#'
+#' @param x1_noise_sd The standard deviation of random noise that should be added when simulating x1.
+#'
 #' @param effect The initial effect of the intervention.
 #'
 #' @param effect_ceiling The maximum value for the pointwise effect of a policy. This argument only works when \code{change_type = "amplification"}.
