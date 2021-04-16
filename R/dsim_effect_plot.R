@@ -9,8 +9,15 @@
 #'
 #' @param plot_output Specifies which time series should be plotted on the y-axis. There are four possible options: \code{pointwise_effect}, \code{cumulative_effect}, \code{untreated_time_series}, and \code{treated_time_series}.
 #'
+#' @param line_color Specifies the color of the output variable.
 
-dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
+dsim_effect_plot <-
+  function(dsim_object,
+           plot_output = "treated_time_series",
+           line_color = "darkblue",
+           line_type = "dashed",
+           line_size = 0.6) {
+
 
   require(assertthat)
   require(ggplot2)
@@ -52,9 +59,9 @@ dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
     plot <- plot + geom_line(
       aes(y = pointwise_effect),
       dsim_object,
-      size = 0.6,
-      colour = "darkblue",
-      linetype = "dashed",
+      size = line_size,
+      colour = line_color,
+      linetype = line_type,
       na.rm = TRUE
     )
 
@@ -65,9 +72,9 @@ dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
     plot <- plot + geom_line(
       aes(y = cumulative_effect),
       dsim_object,
-      size = 0.6,
-      colour = "darkblue",
-      linetype = "dashed",
+      size = line_size,
+      colour = line_color,
+      linetype = line_type,
       na.rm = TRUE
     )
 
@@ -78,9 +85,9 @@ dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
     plot <- plot + geom_line(
       aes(y = y0),
       dsim_object,
-      size = 0.6,
-      colour = "darkblue",
-      linetype = "dashed",
+      size = line_size,
+      colour = line_color,
+      linetype = line_type,
       na.rm = TRUE
     )
 
@@ -91,9 +98,9 @@ dsim_effect_plot <- function(dsim_object, plot_output = "treated_time_series") {
     plot <- plot + geom_line(
       aes(y = y1),
       dsim_object,
-      size = 0.6,
-      colour = "darkblue",
-      linetype = "dashed",
+      size = line_size,
+      colour = line_color,
+      linetype = line_type,
       na.rm = TRUE
     )
 
