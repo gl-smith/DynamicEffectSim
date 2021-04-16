@@ -10,6 +10,10 @@
 #' @param plot_output Specifies which time series should be plotted on the y-axis. There are four possible options: \code{pointwise_effect}, \code{cumulative_effect}, \code{untreated_time_series}, and \code{treated_time_series}.
 #'
 #' @param line_color Specifies the color of the output variable.
+#'
+#' @param line_type Specifies the line type of the output variable.
+#'
+#' @param line_size Specifies the line size of the output variable.
 
 dsim_effect_plot <-
   function(dsim_object,
