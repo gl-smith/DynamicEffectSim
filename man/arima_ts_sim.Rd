@@ -16,6 +16,7 @@ arima_ts_sim(
   treat_start = 75,
   coefficient_x1 = 1,
   change_type = "stasis",
+  functional_form = "linear",
   delta = 1,
   round_to_integers = FALSE,
   seed = 175,
@@ -44,6 +45,8 @@ arima_ts_sim(
 \item{coefficient_x1}{Scales the value of x1.}
 
 \item{change_type}{Specifies the way that the treatment should change over time. Possible inputs are \code{stasis}, \code{attenuation}, and \code{amplification}.}
+
+\item{functional_form}{Specifies the functional form of the intervention. Current options are \code{linear} or \code{exponential}.}
 
 \item{delta}{Specifies that rate that the effect of the treatment changes.}
 

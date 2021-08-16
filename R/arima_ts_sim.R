@@ -30,11 +30,14 @@
 #'
 #' @param change_type Specifies the way that the treatment should change over time. Possible inputs are \code{stasis}, \code{attenuation}, and \code{amplification}.
 #'
+#' @param functional_form Specifies the functional form of the intervention. Current options are \code{linear} or \code{exponential}.
+#'
 #' @param delta Specifies that rate that the effect of the treatment changes.
 #'
 #' @param round_to_integers Should the simulated values be rounded to integers?
 #'
 #' @param seed Sets the random seed.
+
 
 arima_ts_sim <-
   function(intercept = 0,
@@ -48,6 +51,7 @@ arima_ts_sim <-
            treat_start = 75,
            coefficient_x1 = 1,
            change_type = "stasis",
+           functional_form = "linear",
            delta = 1,
            round_to_integers = FALSE,
            seed = 175,
@@ -58,21 +62,15 @@ arima_ts_sim <-
 
     set.seed(seed)
 
-    # Inputs Numeric?
-    # Round Values (Add)
-    # Add Amplification Ceiling
-
     # Tests that Time Series Length > Time Series Start Time
     assert_that(ts_length > treat_start,
                 msg = "The input to `ts_length` needs to be greater than the input to `treat_start`.")
-
 
     # Tests if `change_type` is supported
     input_check <- c("stasis", "attenuation", "amplification")
 
     assert_that(change_type %in% input_check,
                 msg = "The input to `change_type` is not supported. Possible inputs include: `stasis`, `attenuation`, or `amplification`.")
-
 
     arima_args <- list(...)
 
@@ -109,7 +107,7 @@ arima_ts_sim <-
     }
 
     # Multiplying by Post Treatment Ensures No "Pre-Treatment Effects" [0, 1]
-    if (change_type == "attenuation") {
+    if (functional_form == "linear" & change_type == "attenuation") {
       final_output_data <- base_output_data %>%
         mutate(
           y1 = y0 + post_treatment*(effect - time_post_treat * delta),
@@ -119,7 +117,7 @@ arima_ts_sim <-
         )
     }
 
-    if (change_type == "amplification") {
+    if (functional_form == "linear" & change_type == "amplification") {
       final_output_data <- base_output_data %>%
         mutate(
           y1 = y0 + post_treatment*(effect + time_post_treat * delta),
@@ -129,6 +127,25 @@ arima_ts_sim <-
         )
     }
 
+    if (functional_form == "exponential" & change_type == "attenuation") {
+      final_output_data <- base_output_data %>%
+        mutate(
+          y1 = y0 + post_treatment*(effect * (1 - delta) ^ time_post_treat),
+          y1 = if_else(y1 < y0, y0, y1),
+          pointwise_effect = y1 - y0,
+          cumulative_effect = cumsum(pointwise_effect)
+        )
+    }
+
+    if (functional_form == "exponential" & change_type == "amplification") {
+      final_output_data <- base_output_data %>%
+        mutate(
+          y1 = y0 + post_treatment*( effect * (1 + delta) ^ time_post_treat),
+          y1 = if_else(y1 > effect_ceiling, y0 + effect_ceiling, y1),
+          pointwise_effect = y1 - y0,
+          cumulative_effect = cumsum(pointwise_effect)
+        )
+    }
 
     if (round_to_integers == "TRUE") {
       final_output_data <- final_output_data %>%
