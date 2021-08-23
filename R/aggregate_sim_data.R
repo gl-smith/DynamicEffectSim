@@ -1,11 +1,14 @@
-#' Aggregate simmulated time series data by group
+#' @title Dynanimic Effect Aggregation
 #'
-#' @param data Data frame
-#' @param agg_function
+#' @description
+#' Aggregates the simmulated time series data by group
+#'
+#' @param dsim_object The output from \code{arima_ts_sim}.
+#' @param agg_function Specifies how to aggregate the data. Options include \code{"sum"} or \code{"mean}.
 #' @param window_size The number of consecutive time intervals to group together.
 #' @param drop_incomplete_window Drop groups that dont have a full window's worth of observations.
 
-aggregate_sim_data <- function(data,
+aggregate_sim_data <- function(dsim_object,
                                agg_function = "sum",
                                window_size = 7,
                                drop_incomplete_window = TRUE) {
