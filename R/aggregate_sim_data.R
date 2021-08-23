@@ -29,7 +29,7 @@ aggregate_sim_data <- function(dsim_object,
   # Counts number of observations for each time window
   # Drops windows with incomplete observations if specified
 
-  base_output <- tibble::as_tibble(data) %>%
+  base_output <- tibble::as_tibble(dsim_object) %>%
     dplyr::mutate(time_interval = group_n_consec_rows(.)) %>%
     dplyr::group_by(time_interval) %>%
     dplyr::mutate(values_in_window = n())
