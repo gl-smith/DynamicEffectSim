@@ -2,21 +2,24 @@
 % Please edit documentation in R/aggregate_sim_data.R
 \name{aggregate_sim_data}
 \alias{aggregate_sim_data}
-\title{Aggregate simmulated time series data by group}
+\title{Dynanimic Effect Aggregation}
 \usage{
 aggregate_sim_data(
-  data,
+  dsim_object,
   agg_function = "sum",
   window_size = 7,
   drop_incomplete_window = TRUE
 )
 }
 \arguments{
-\item{data}{Data frame}
+\item{dsim_object}{The output from \code{arima_ts_sim}.}
 
-\item{agg_function}{#' @param window_size The number of consecutive time intervals to group together
-#' @param drop_incomplete_window}
+\item{agg_function}{Specifies how to aggregate the data. Options include \code{"sum"} or \code{"mean}.}
+
+\item{window_size}{The number of consecutive time intervals to group together.}
+
+\item{drop_incomplete_window}{Drop groups that dont have a full window's worth of observations.}
 }
 \description{
-Aggregate simmulated time series data by group
+Aggregates the simmulated time series data by group
 }
