@@ -16,12 +16,14 @@ aggregate_sim_data <- function(dsim_object,
   require(assertthat)
   require(tidyverse)
 
-  assert_that(any(class(dsim_object) == "dyn-arima-sim"),
-              msg = "The input to argument one must be of class dyn-arima-sim")
+  assert_that(
+    any(class(dsim_object) == "dyn-arima-sim"),
+    msg = "The input to argument one must be of class dyn-arima-sim"
+    )
 
-
+    # Ensures that window_size input is an integer
     assert_that(
-      is.integer(window_size),
+      window_size %% 1 == 0,
       msg = "The input to the argument window_size must be an integer."
     )
 
