@@ -1,5 +1,4 @@
 
-
 #' @title Simulates time series using univariate ARIMA models
 #'
 #' @description
