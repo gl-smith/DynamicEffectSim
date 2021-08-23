@@ -2,8 +2,8 @@
 #'
 #' @param data Data frame
 #' @param agg_function
-#' #' @param window_size The number of consecutive time intervals to group together.
-#' #' @param drop_incomplete_window Drop groups that dont have a full window's worth of observations.
+#' @param window_size The number of consecutive time intervals to group together.
+#' @param drop_incomplete_window Drop groups that dont have a full window's worth of observations.
 
 aggregate_sim_data <- function(data,
                                agg_function = "sum",
