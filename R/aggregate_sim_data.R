@@ -57,7 +57,6 @@ aggregate_sim_data <- function(data,
       dplyr::rename(time = time_interval)
   }
 
-  # Adds
   final_output <- add_dsim_class(final_output)
 
   # Species how the data was aggregated
