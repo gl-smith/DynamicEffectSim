@@ -1,7 +1,7 @@
-#' @title Dynanimic Effect Aggregation
+#' @title Dynamic Effect Aggregation
 #'
 #' @description
-#' Aggregates the simmulated time series data by group
+#' Aggregates the simulated time series data by group
 #'
 #' @param dsim_object The output from \code{arima_ts_sim}.
 #' @param agg_function Specifies how to aggregate the data. Options include \code{"sum"} or \code{"mean}.
