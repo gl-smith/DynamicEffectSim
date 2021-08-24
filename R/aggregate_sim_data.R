@@ -1,7 +1,7 @@
 #' @title Dynamic Effect Aggregation
 #'
 #' @description
-#' Aggregates the simulated time series data by rolling windows
+#' Aggregates the simulated time series data by manually specified rolling windows
 #'
 #' @param dsim_object The output from \code{arima_ts_sim}.
 #' @param agg_function Specifies how to aggregate the data. Options include \code{"sum"} or \code{"mean}.
