@@ -2,7 +2,7 @@
 % Please edit documentation in R/aggregate_sim_data.R
 \name{aggregate_sim_data}
 \alias{aggregate_sim_data}
-\title{Dynamic Effect Aggregation}
+\title{Dynanimic Effect Aggregation}
 \usage{
 aggregate_sim_data(
   dsim_object,
@@ -21,5 +21,5 @@ aggregate_sim_data(
 \item{drop_incomplete_window}{Drop groups that dont have a full window's worth of observations.}
 }
 \description{
-Aggregates the simulated time series data by rolling windows
+Aggregates the simulated time series data by user specified rolling time windows.
 }
