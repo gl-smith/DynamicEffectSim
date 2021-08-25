@@ -1,4 +1,4 @@
-#' @title Dynanimic Effect Aggregation
+#' @title Dynamic Effect Aggregation
 #'
 #' @description
 #' Aggregates the simulated time series data by user specified rolling time windows.
