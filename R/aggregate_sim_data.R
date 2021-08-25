@@ -12,20 +12,15 @@ aggregate_sim_data <- function(dsim_object,
                                agg_function = "sum",
                                window_size = 7,
                                drop_incomplete_window = TRUE) {
-
   require(assertthat)
   require(tidyverse)
 
-  assert_that(
-    any(class(dsim_object) == "dyn-arima-sim"),
-    msg = "The input to argument one must be of class dyn-arima-sim"
-    )
+  assert_that(any(class(dsim_object) == "dyn-arima-sim"),
+              msg = "The input to argument one must be of class dyn-arima-sim")
 
-    # Ensures that window_size input is an integer
-    assert_that(
-      window_size %% 1 == 0,
-      msg = "The input to the argument window_size must be an integer."
-    )
+  # Ensures that window_size input is an integer
+  assert_that(window_size %% 1 == 0,
+              msg = "The input to the argument window_size must be an integer.")
 
   # Creates data frame grouped by specified time interval
   # Counts number of observations for each time window
@@ -38,23 +33,24 @@ aggregate_sim_data <- function(dsim_object,
 
 
   # Drops windows with incomplete observations if specified
-  if(drop_incomplete_window == TRUE) {
-    base_output <- dplyr::filter(base_output, values_in_window == window_size)
+  if (drop_incomplete_window == TRUE) {
+    base_output <-
+      dplyr::filter(base_output, values_in_window == window_size)
   }
 
   # Warns users if a window is incomplete
-  if(min(base_output$values_in_window) < window_size) {
+  if (min(base_output$values_in_window) < window_size) {
     warning("The output contains an incomplete window.")
   }
 
-  if(agg_function == "sum") {
+  if (agg_function == "sum") {
     final_output <- base_output %>%
       dplyr::summarise_at(vars(y0:cumulative_effect), sum) %>%
       dplyr::ungroup() %>%
       dplyr::rename(time = time_interval)
   }
 
-  if(agg_function == "mean") {
+  if (agg_function == "mean") {
     final_output <- base_output %>%
       dplyr::summarise_at(vars(y0:cumulative_effect), mean) %>%
       dplyr::ungroup() %>%
